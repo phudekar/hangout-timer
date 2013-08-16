@@ -33,6 +33,10 @@
        		background-color: blue;
        	}
 
+              #messageArea{
+                     vertical-align: bottom;
+              }
+
        </style>
        <script type="text/javascript">
        this.interval = null;
@@ -45,10 +49,12 @@
        		stop();
        	}
 		this.interval = setInterval(function(){tick()},1000);
+              sendMessage("started");
        };
 
        var stop = function(){
 		window.clearInterval(interval);
+                sendMessage("stopped");
        };
 
        var reset = function(){
@@ -57,6 +63,7 @@
 	       this.s = 0;
 
 	       displayTime();
+                sendMessage("reset");
        }
 
        var tick = function(){
@@ -73,7 +80,6 @@
 		}
 
 		displayTime();
-	
        };
 
        var displayTime = function(){
@@ -97,6 +103,16 @@
 		return str;
        };
 
+       var sendMessage = function(msg){
+            var messageArea =   document.getElementById('messageArea');
+              messageArea.innerText = messageArea.innerHTML + "\n" + getUser() + " " + msg + " the timer";
+              messageArea.scrollTop = messageArea.scrollTop + 50;
+       };
+
+       var getUser = function(){
+              return "user";
+       };
+
        </script>
  	</head>
 	<body>
@@ -107,6 +123,10 @@
 			<input type="button" id="stop" value="Stop" onclick="stop()">
 			<input type="button" id="reset" value="Reset" onclick="reset()">
 		</div>
+                <div class="messages">
+      <textarea id="messageArea" rows="10" cols="32" readonly="readonly">
+      </textarea>
+    </div>
 	</div>
 	</body>
 </html>  

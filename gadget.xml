@@ -7,7 +7,7 @@
   <Content type="html">
     <![CDATA[
       <script src="//plus.google.com/hangouts/_/api/v1/hangout.js"></script>
-     <html>
+<html>
   <head>
        <style type="text/css">
         #timer{
@@ -42,6 +42,10 @@
           background-color: blue;
         }
 
+              #messageArea{
+                     vertical-align: bottom;
+              }
+
        </style>
        <script type="text/javascript">
        this.interval = null;
@@ -54,10 +58,12 @@
           stop();
         }
     this.interval = setInterval(function(){tick()},1000);
+              sendMessage("started");
        };
 
        var stop = function(){
     window.clearInterval(interval);
+                sendMessage("stopped");
        };
 
        var reset = function(){
@@ -66,6 +72,7 @@
          this.s = 0;
 
          displayTime();
+                sendMessage("reset");
        }
 
        var tick = function(){
@@ -82,7 +89,6 @@
     }
 
     displayTime();
-  
        };
 
        var displayTime = function(){
@@ -106,19 +112,42 @@
     return str;
        };
 
+       var sendMessage = function(msg){
+          gapi.hangout.data.sendMessage(msg)
+       };
+
+       var getUser = function(){
+              return "user";
+       };
+
+       var init = function(){
+        gapi.hangout.data.onMessageReceived.add(
+          function(msg){
+           var messageArea =   document.getElementById('messageArea');
+               messageArea.innerText = messageArea.innerHTML + "\n" + msg.senderId + " : " + msg.message ;
+              messageArea.scrollTop = messageArea.scrollTop + 50;
+        }
+        );
+       };
+
        </script>
   </head>
   <body>
-  <div class="main">
+  <div class="main" onload="init()">
     <div id="timer">00:00:00</div>
     <div class="buttons">
       <input type="button" id="start" value="Start" onclick="start()">
       <input type="button" id="stop" value="Stop" onclick="stop()">
       <input type="button" id="reset" value="Reset" onclick="reset()">
     </div>
+                <div class="messages">
+      <textarea id="messageArea" rows="10" cols="32" readonly="readonly">
+      </textarea>
+    </div>
   </div>
   </body>
 </html>  
+
     ]]>
   </Content>
 </Module>
