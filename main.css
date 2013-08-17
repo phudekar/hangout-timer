@@ -9,6 +9,10 @@
  border-radius: 10px;
 }
 
+.main{
+  margin: 5px;
+}
+
 .buttons{
  margin: 5px 0px;
 }
