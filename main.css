@@ -1,0 +1,64 @@
+#timer{
+ padding: 10px;
+ background-color: black;
+ background: -webkit-linear-gradient(top, gray, black);
+ color: white;
+ font-size: 72px;
+ width: 280px;
+ font-family: arial;
+ border-radius: 10px;
+}
+
+.buttons{
+ margin: 5px 0px;
+}
+
+#start, #stop, #reset{
+ border-style: none;
+ padding: 10px 20px;
+ color: white;
+ font-size: 18px;
+ border-radius: 5px;
+ cursor: hand;
+ width: 97px;
+ margin: 0px;
+ box-shadow: -1px -1px 1px gray;
+ text-shadow: 1px 1px 6px black;
+}
+
+#start{
+ background-color: green;
+ background: -webkit-linear-gradient(top, lightgreen, green);
+}
+
+#stop{
+ background-color: red;
+ background: -webkit-linear-gradient(top, lightpink, red);
+}
+
+#reset{
+ background-color: blue;
+ background: -webkit-linear-gradient(top, skyblue, blue);
+}
+
+#messageArea{
+ vertical-align: bottom;
+ font-family: arial;
+ border: none;
+ margin: 5px;
+ width: 100%;
+
+}
+
+.messages, .messagesOverlay{
+  position: absolute;
+  top:200px;
+  width: 100%;
+}
+
+.messagesOverlay{
+  background: white;
+  background: -webkit-linear-gradient(top, white, rgba(255,255,255,0));
+  width: 100%;
+  min-height: 50px;
+}
