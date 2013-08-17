@@ -53,30 +53,30 @@
        this.m = 0;
        this.s = 0;
 
-       var start = function(sendMessage){
+       var start = function(sendMessageToParticipants){
         if(this.interval  && this.interval != null){
           stop();
         }
     this.interval = setInterval(function(){tick()},1000);
-    if(sendMessage == true){
+    if(sendMessageToParticipants == true){
               sendMessage("started");
               }
        };
 
-       var stop = function(){
+       var stop = function(sendMessageToParticipants){
     window.clearInterval(interval);
-     if(sendMessage == true){
+     if(sendMessageToParticipants == true){
                 sendMessage("stopped");
                 }
        };
 
-       var reset = function(){
+       var reset = function(sendMessageToParticipants){
          this.h = 0;
          this.m = 0;
          this.s = 0;
 
          displayTime();
-          if(sendMessage == true){
+          if(sendMessageToParticipants == true){
                 sendMessage("reset");
                 }
        }
