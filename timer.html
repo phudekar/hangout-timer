@@ -1,121 +1,11 @@
+<!DOCTYPE html>
 <html>
-	<head>
-       <style type="text/css">
-       	#timer{
-       		padding: 10px;
-       		background-color: black;
-       		color: white;
-       		font-size: 72px;
-       	}
-
-       	.buttons{
-       		margin: 5px;
-       	}
-
-       	#start, #stop, #reset{
-       		border-style: none;
-			padding: 10px 20px;
-			color: white;
-			font-size: 18px;
-			border-radius: 5px;
-			cursor: hand;
-       	}
-
-       	#start{
-       		background-color: green;
-       	}
-
-       	#stop{
-       		background-color: red;
-       	}
-
-       	#reset{
-       		background-color: blue;
-       	}
-
-              #messageArea{
-                     vertical-align: bottom;
-              }
-
-       </style>
-       <script type="text/javascript">
-       this.interval = null;
-       this.h = 0;
-       this.m = 0;
-       this.s = 0;
-
-       var start = function(){
-       	if(this.interval  && this.interval != null){
-       		stop();
-       	}
-		this.interval = setInterval(function(){tick()},1000);
-              sendMessage("started");
-       };
-
-       var stop = function(){
-		window.clearInterval(interval);
-                sendMessage("stopped");
-       };
-
-       var reset = function(){
-	       this.h = 0;
-	       this.m = 0;
-	       this.s = 0;
-
-	       displayTime();
-                sendMessage("reset");
-       }
-
-       var tick = function(){
-		this.s += 1;
-		if(this.s >= 60)
-		{
-			this.m += 1;
-			this.s = 0;
-		}
-
-		if(this.m >= 60){
-			this.h += 1;
-			this.m = 0;
-		}
-
-		displayTime();
-       };
-
-       var displayTime = function(){
-       	html = "";
-		html += getText(this.h)
-		html += ":";
-
-		html += getText(this.m)
-		html += ":";
-
-		html += getText(this.s)
-
-		document.getElementById('timer').innerText = html;
-		};
-
-       var getText = function(n){
-       	var str  = "";
-       	if(n<10)
-			str += "0";
-		str += n;
-		return str;
-       };
-
-       var sendMessage = function(msg){
-            var messageArea =   document.getElementById('messageArea');
-              messageArea.innerText = messageArea.innerHTML + "\n" + getUser() + " " + msg + " the timer";
-              messageArea.scrollTop = messageArea.scrollTop + 50;
-       };
-
-       var getUser = function(){
-              return "user";
-       };
-
-       </script>
- 	</head>
-	<body>
+<head>
+<title>Hangout Timer</title>
+ <link rel="stylesheet" type="text/css" href="main.css"/>
+ <script type="text/javascript" src="timer.js"></script>
+</head>
+<body>
 	<div class="main">
 		<div id="timer">00:00:00</div>
 		<div class="buttons">
@@ -123,10 +13,13 @@
 			<input type="button" id="stop" value="Stop" onclick="stop()">
 			<input type="button" id="reset" value="Reset" onclick="reset()">
 		</div>
-                <div class="messages">
-      <textarea id="messageArea" rows="10" cols="32" readonly="readonly">
-      </textarea>
+    <div>
+      <div class="messages">
+        <textarea id="messageArea" rows="10" cols="32" readonly="readonly">
+        </textarea>
+      </div>
+      <div class="messagesOverlay"></div>
     </div>
-	</div>
-	</body>
+  </div>
+</body>
 </html>  
