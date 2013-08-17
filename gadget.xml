@@ -9,8 +9,8 @@
       <script src="//plus.google.com/hangouts/_/api/v1/hangout.js"></script>
 <html>
   <head>
-      <link rel="stylesheet" type="text/css" href="https://raw.github.com/phudekar/hangout-timer/master/main.css"/>
- <script type="text/javascript" src="https://raw.github.com/phudekar/hangout-timer/master/timer.js"></script>
+      <link rel="stylesheet" type="text/css" href="https://rawgithub.com/phudekar/hangout-timer/master/main.css"/>
+ <script type="text/javascript" src="https://rawgithub.com/phudekar/hangout-timer/master/timer.js"></script>
   </head>
   <body>
   <div class="main">
