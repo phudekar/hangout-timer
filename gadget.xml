@@ -59,6 +59,7 @@
         }
     this.interval = setInterval(function(){tick()},1000);
     if(sendMessageToParticipants == true){
+    displayMessage(getLocalUser(), "started");
               sendMessage("started");
               }
        };
@@ -66,6 +67,7 @@
        var stop = function(sendMessageToParticipants){
     window.clearInterval(interval);
      if(sendMessageToParticipants == true){
+     displayMessage(getLocalUser(), "stopped");
                 sendMessage("stopped");
                 }
        };
@@ -77,9 +79,14 @@
 
          displayTime();
           if(sendMessageToParticipants == true){
+          displayMessage(getLocalUser(), "reset");
                 sendMessage("reset");
                 }
-       }
+       };
+
+       var getLocalUser =function(){
+        return gapi.hangout.getLocalParticipant();
+       };
 
        var tick = function(){
     this.s += 1;
@@ -136,10 +143,8 @@
           gapi.hangout.data.onMessageReceived.add(
             function(msg){
              console.log('message received'); 
-              var messageArea =   document.getElementById('messageArea');
               var participant = gapi.hangout.getParticipantById(msg.senderId);
-              messageArea.innerText = messageArea.innerHTML + "\n" + participant.person.displayName + " : " + msg.message ;
-              messageArea.scrollTop = messageArea.scrollTop + 50;
+              displayMessage(participant, msg.message);
 
               if(msg.message == "started"){
                 start();
@@ -162,7 +167,13 @@
       } 
     }
   );
-}
+};
+
+var displayMessage = function(participant, message){
+              var messageArea =   document.getElementById('messageArea');
+              messageArea.innerText = messageArea.innerHTML + "\n" + participant.person.displayName + " : " + message ;
+              messageArea.scrollTop = messageArea.scrollTop + 50;
+};
 
 gadgets.util.registerOnLoadHandler(init);
  console.log('script loaded'); 
