@@ -114,6 +114,7 @@
 
        var sendMessage = function(msg){
           gapi.hangout.data.sendMessage(msg)
+           console.log(msg); 
        };
 
        var getUser = function(){
@@ -121,16 +122,19 @@
        };
 
   var init = function(){
+   console.log('init called'); 
   gapi.hangout.onApiReady.add( 
     function(eventObj) { 
       if (eventObj.isApiReady) { 
         try { 
           gapi.hangout.data.onMessageReceived.add(
             function(msg){
+             console.log('message received'); 
               var messageArea =   document.getElementById('messageArea');
               messageArea.innerText = messageArea.innerHTML + "\n" + msg.senderId + " : " + msg.message ;
               messageArea.scrollTop = messageArea.scrollTop + 50;
             });
+            console.log('message handler registered');  
         } catch (e) { 
           console.log('init:ERROR'); 
           console.log(e); 
@@ -141,7 +145,7 @@
 }
 
 gadgets.util.registerOnLoadHandler(init);
-
+ console.log('script loaded'); 
        </script>
   </head>
   <body>
