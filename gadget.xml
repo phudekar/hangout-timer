@@ -140,10 +140,12 @@
   );
 }
 
+gadgets.util.registerOnLoadHandler(init);
+
        </script>
   </head>
   <body>
-  <div class="main" onload="init()">
+  <div class="main">
     <div id="timer">00:00:00</div>
     <div class="buttons">
       <input type="button" id="start" value="Start" onclick="start()">
