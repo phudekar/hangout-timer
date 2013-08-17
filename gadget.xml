@@ -121,13 +121,22 @@
        };
 
        var init = function(){
-        gapi.hangout.data.onMessageReceived.add(
-          function(msg){
-           var messageArea =   document.getElementById('messageArea');
-               messageArea.innerText = messageArea.innerHTML + "\n" + msg.senderId + " : " + msg.message ;
-              messageArea.scrollTop = messageArea.scrollTop + 50;
-        }
-        );
+        gapi.hangout.onApiReady.add( 
+        function(eventObj) { 
+          if (eventObj.isApiReady) { 
+            try { 
+                 gapi.hangout.data.onMessageReceived.add(
+                function(msg){
+                  var messageArea =   document.getElementById('messageArea');
+                  messageArea.innerText = messageArea.innerHTML + "\n" + msg.senderId + " : " + msg.message ;
+                  messageArea.scrollTop = messageArea.scrollTop + 50;
+                }
+            } catch (e) { 
+            console.log('init:ERROR'); 
+            console.log(e); 
+            } 
+          } 
+        });
        };
 
        </script>
