@@ -53,17 +53,21 @@
        this.m = 0;
        this.s = 0;
 
-       var start = function(){
+       var start = function(sendMessage){
         if(this.interval  && this.interval != null){
           stop();
         }
     this.interval = setInterval(function(){tick()},1000);
+    if(sendMessage == true){
               sendMessage("started");
+              }
        };
 
        var stop = function(){
     window.clearInterval(interval);
+     if(sendMessage == true){
                 sendMessage("stopped");
+                }
        };
 
        var reset = function(){
@@ -72,7 +76,9 @@
          this.s = 0;
 
          displayTime();
+          if(sendMessage == true){
                 sendMessage("reset");
+                }
        }
 
        var tick = function(){
@@ -131,8 +137,22 @@
             function(msg){
              console.log('message received'); 
               var messageArea =   document.getElementById('messageArea');
-              messageArea.innerText = messageArea.innerHTML + "\n" + msg.senderId + " : " + msg.message ;
+              var participant = gapi.hangout.getParticipantById(msg.senderId);
+              messageArea.innerText = messageArea.innerHTML + "\n" + participant.person.displayName + " : " + msg.message ;
               messageArea.scrollTop = messageArea.scrollTop + 50;
+
+              if(msg.message == "started"){
+                start();
+              }
+
+              if(msg.message == "stopped"){
+                stop();
+              }
+
+              if(msg.message == "reset"){
+                reset();
+              }
+
             });
             console.log('message handler registered');  
         } catch (e) { 
@@ -152,9 +172,9 @@ gadgets.util.registerOnLoadHandler(init);
   <div class="main">
     <div id="timer">00:00:00</div>
     <div class="buttons">
-      <input type="button" id="start" value="Start" onclick="start()">
-      <input type="button" id="stop" value="Stop" onclick="stop()">
-      <input type="button" id="reset" value="Reset" onclick="reset()">
+      <input type="button" id="start" value="Start" onclick="start(true)">
+      <input type="button" id="stop" value="Stop" onclick="stop(true)">
+      <input type="button" id="reset" value="Reset" onclick="reset(true)">
     </div>
                 <div class="messages">
       <textarea id="messageArea" rows="10" cols="32" readonly="readonly">
