@@ -116,7 +116,20 @@ var init = function(){
            displayMessage(participant, message.action);
 
            displayTime(message);
+
+           if(msg.message == "started" || msg.message == ""){
+            start();
+          }
+
+
+          if(msg.message == "stopped"){
+            stop();
+          }
+
+          if(msg.message == "reset"){
+           reset();
          });
+
         console.log('message handler registered');  
       } catch (e) { 
         console.log('init:ERROR'); 
