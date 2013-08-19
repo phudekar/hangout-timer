@@ -113,8 +113,10 @@ var init = function(){
            var participant = gapi.hangout.getParticipantById(msg.senderId);
            var message = JSON.parse(msg.message);
 
-           displayMessage(participant, message.action);
-
+           if(message.action != ""){
+             displayMessage(participant, message.action);
+           }
+           
            displayTime(message);
 
            if(message.action == "started" || message.action == ""){
