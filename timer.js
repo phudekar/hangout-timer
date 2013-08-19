@@ -77,7 +77,7 @@ var getText = function(n){
 
 var sendMessage = function(msg){
   var message = {"action":msg,"hours":this.h, "minutes":this.m, "seconds":this.s};
-  msg = JSON.stringify(msg);
+  msg = JSON.stringify(message);
   gapi.hangout.data.sendMessage(msg)
   console.log(msg); 
 };
