@@ -76,6 +76,8 @@ var getText = function(n){
 };
 
 var sendMessage = function(msg){
+  var message = {"action":msg,"hours":this.h, "minutes":this.m, "seconds":this.s};
+  msg = JSON.stringify(msg);
   gapi.hangout.data.sendMessage(msg)
   console.log(msg); 
 };
@@ -94,29 +96,23 @@ var init = function(){
           function(msg){
            console.log('message received'); 
            var participant = gapi.hangout.getParticipantById(msg.senderId);
-           displayMessage(participant, msg.message);
+           var message = JSON.parse(msg.message);
 
-           if(msg.message == "started"){
-            start();
-          }
+           displayMessage(participant, message.action);
 
-          if(msg.message == "stopped"){
-            stop();
-          }
+           this.h = message.hours;
+           this.m = message.minutes;
+           this.s = message.seconds;
 
-          if(msg.message == "reset"){
-            reset();
-          }
-
-        });
+           displayTime();
+         });
         console.log('message handler registered');  
       } catch (e) { 
         console.log('init:ERROR'); 
         console.log(e); 
       } 
     } 
-  }
-  );
+  });
 };
 
 var displayMessage = function(participant, message){
