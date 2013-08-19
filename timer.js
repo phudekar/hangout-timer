@@ -117,16 +117,15 @@ var init = function(){
 
            displayTime(message);
 
-           if(msg.message == "started" || msg.message == ""){
+           if(message.action == "started" || message.action == ""){
             start();
           }
 
-
-          if(msg.message == "stopped"){
+          if(message.action == "stopped"){
             stop();
           }
 
-          if(msg.message == "reset"){
+          if(message.action == "reset"){
            reset();
          });
 
