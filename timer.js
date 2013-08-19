@@ -51,7 +51,7 @@ var tick = function(){
     this.m = 0;
   }
 
-  sendMessage(null);
+  sendMessage('');
 
   displayTime();
 };
@@ -85,7 +85,7 @@ var getText = function(n){
 };
 
 var sendMessage = function(msg){
-  var message = {"action":msg,"hours":this.h, "minutes":this.m, "seconds":this.s};
+  var message = {"action":msg, "hours":this.h, "minutes":this.m, "seconds":this.s};
   msg = JSON.stringify(message);
   gapi.hangout.data.sendMessage(msg)
   console.log(msg); 
@@ -106,10 +106,8 @@ var init = function(){
            console.log('message received'); 
            var participant = gapi.hangout.getParticipantById(msg.senderId);
            var message = JSON.parse(msg.message);
-           
-           if(message.action && message.action!=null){
+
              displayMessage(participant, message.action);
-           }
 
            displayTime(message);
          });
