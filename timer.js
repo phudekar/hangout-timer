@@ -44,10 +44,6 @@ var getLocalUser =function(){
 var tick = function(){
   this.s += 1;
 
-  if(this.s % 10 == 0 && this.publisher == true){
-      sendMessage("");
-  }
-
   if(this.s >= 60)
   {
     this.m += 1;
@@ -57,6 +53,10 @@ var tick = function(){
   if(this.m >= 60){
     this.h += 1;
     this.m = 0;
+  }
+
+  if(this.publisher == true){
+    sendMessage("");
   }
 
 
