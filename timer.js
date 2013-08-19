@@ -55,11 +55,9 @@ var tick = function(){
     this.m = 0;
   }
 
-  if(this.publisher == true){
+  if(this.s % 5 == 0 && this.publisher == true){
     sendMessage("");
   }
-
-
 
   displayTime();
 };
