@@ -2,6 +2,7 @@ this.interval = null;
 this.h = 0;
 this.m = 0;
 this.s = 0;
+this.publisher = false;
 
 var start = function(sendMessageToParticipants){
   if(this.interval  && this.interval != null){
@@ -11,6 +12,7 @@ var start = function(sendMessageToParticipants){
   if(sendMessageToParticipants == true){
     displayMessage(getLocalUser(), "started");
     sendMessage("started");
+    this.publisher = true;
   }
 };
 
@@ -19,6 +21,7 @@ var stop = function(sendMessageToParticipants){
   if(sendMessageToParticipants == true){
    displayMessage(getLocalUser(), "stopped");
    sendMessage("stopped");
+   this.publisher = false;
  }
 };
 
@@ -51,7 +54,9 @@ var tick = function(){
     this.m = 0;
   }
 
-  sendMessage('');
+  if(this.publisher == true){
+    sendMessage("");
+  }
 
   displayTime();
 };
@@ -107,7 +112,7 @@ var init = function(){
            var participant = gapi.hangout.getParticipantById(msg.senderId);
            var message = JSON.parse(msg.message);
 
-             displayMessage(participant, message.action);
+           displayMessage(participant, message.action);
 
            displayTime(message);
          });
