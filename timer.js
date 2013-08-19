@@ -43,13 +43,15 @@ var getLocalUser =function(){
 
 var tick = function(){
   this.s += 1;
+
+  if(this.s % 10 == 0 && this.publisher == true){
+      sendMessage("");
+  }
+
   if(this.s >= 60)
   {
     this.m += 1;
     this.s = 0;
-    if(this.publisher == true){
-      sendMessage("");
-    }
   }
 
   if(this.m >= 60){
@@ -128,7 +130,7 @@ var init = function(){
           if(message.action == "reset"){
            reset();
          }
-         
+
        });
 
         console.log('message handler registered');  
