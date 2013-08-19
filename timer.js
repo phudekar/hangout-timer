@@ -47,6 +47,9 @@ var tick = function(){
   {
     this.m += 1;
     this.s = 0;
+    if(this.publisher == true){
+      sendMessage("");
+    }
   }
 
   if(this.m >= 60){
@@ -54,9 +57,7 @@ var tick = function(){
     this.m = 0;
   }
 
-  if(this.publisher == true){
-    sendMessage("");
-  }
+
 
   displayTime();
 };
