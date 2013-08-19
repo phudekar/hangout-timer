@@ -127,22 +127,22 @@ var init = function(){
 
           if(message.action == "reset"){
            reset();
-         });
+         }
 
-        console.log('message handler registered');  
-      } catch (e) { 
+         console.log('message handler registered');  
+       } catch (e) { 
         console.log('init:ERROR'); 
         console.log(e); 
       } 
     } 
   });
-};
+      };
 
-var displayMessage = function(participant, message){
-  var messageArea =   document.getElementById('messageArea');
-  messageArea.innerText = messageArea.innerHTML + "\n" + participant.person.displayName + " : " + message ;
-  messageArea.scrollTop = messageArea.scrollTop + 50;
-};
+      var displayMessage = function(participant, message){
+        var messageArea =   document.getElementById('messageArea');
+        messageArea.innerText = messageArea.innerHTML + "\n" + participant.person.displayName + " : " + message ;
+        messageArea.scrollTop = messageArea.scrollTop + 50;
+      };
 
-gadgets.util.registerOnLoadHandler(init);
-console.log('script loaded'); 
+      gadgets.util.registerOnLoadHandler(init);
+      console.log('script loaded'); 
